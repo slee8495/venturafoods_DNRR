@@ -8,7 +8,7 @@ library(skimr)
 library(janitor)
 library(lubridate)
 
-test 
+
 # Read po, receipt ----
 po <- read_excel("C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/wo receipt custord po for R.xlsx",
                  sheet = "po",
