@@ -10,12 +10,12 @@ library(lubridate)
 
 
 # Read po, receipt ----
-po <- read_excel("C:/Users/lliang/OneDrive - Ventura Foods/R Studio/Source Data/wo receipt custord po - 11.21.22.xlsx",
+po <- read_excel("C:/Users/lliang/OneDrive - Ventura Foods/R Studio/Source Data/wo receipt custord po - 12.07.22.xlsx",
                  sheet = "po",
                  col_names = FALSE)
 
 
-receipt <- read_excel("C:/Users/lliang/OneDrive - Ventura Foods/R Studio/Source Data/wo receipt custord po - 11.21.22.xlsx",
+receipt <- read_excel("C:/Users/lliang/OneDrive - Ventura Foods/R Studio/Source Data/wo receipt custord po - 12.07.22.xlsx",
                       sheet = "receipt",
                       col_names = FALSE)
 
@@ -101,6 +101,6 @@ openxlsx::writeDataTable(example, "RM PO Data", po)
 openxlsx::writeDataTable(example, "RM Reciept Data", receipt)
 
 
-openxlsx::saveWorkbook(example, file = "po, receipt_1123.xlsx")
+openxlsx::saveWorkbook(example, file = "po, receipt_1208.xlsx")
 
 
