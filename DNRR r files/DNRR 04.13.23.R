@@ -10,12 +10,12 @@ library(lubridate)
 
 
 # Read po, receipt ----
-po <- read_excel("C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2023/4.6.23/receipt po.xlsx",
+po <- read_excel("C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2023/4.13.23/receipt po.xlsx",
                  sheet = "po",
                  col_names = FALSE)
 
 
-receipt <- read_excel("C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2023/4.6.23/receipt po.xlsx",
+receipt <- read_excel("C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2023/4.13.23/receipt po.xlsx",
                       sheet = "receipt",
                       col_names = FALSE)
 
