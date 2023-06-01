@@ -99,8 +99,8 @@ writexl::write_xlsx(receipt, "receipt.xlsx")
 
 #### move files ####
 file.rename(from="C:/Users/slee/OneDrive - Ventura Foods/Stan/R Codes/Projects/DNRR/venturafoods_DNRR/po.xlsx",
-            to="C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2023/5.25.23/po.xlsx")
+            to="C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2023/5.31.23/po.xlsx")
 
 
 file.rename(from="C:/Users/slee/OneDrive - Ventura Foods/Stan/R Codes/Projects/DNRR/venturafoods_DNRR/receipt.xlsx",
-            to="C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2023/5.25.23/receipt.xlsx")
+            to="C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2023/5.31.23/receipt.xlsx")
