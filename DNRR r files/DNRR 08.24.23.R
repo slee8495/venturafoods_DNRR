@@ -91,22 +91,5 @@ receipt %>%
 #### Combine two files ####
 
 
-writexl::write_xlsx(po, "po.xlsx")
-writexl::write_xlsx(receipt, "receipt.xlsx")
-
-
-
-
-#### move files ####
-file.rename(from="C:/Users/slee/OneDrive - Ventura Foods/Stan/R Codes/Projects/DNRR/venturafoods_DNRR/po.xlsx",
-            to="C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2023/8.30.23/po.xlsx")
-
-
-file.rename(from="C:/Users/slee/OneDrive - Ventura Foods/Stan/R Codes/Projects/DNRR/venturafoods_DNRR/receipt.xlsx",
-            to="C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2023/8.30.23/receipt.xlsx")
-
-
-
-
-
-
+writexl::write_xlsx(po, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2023/9.7.23/po.xlsx")
+writexl::write_xlsx(receipt, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2023/9.7.23/receipt.xlsx")
