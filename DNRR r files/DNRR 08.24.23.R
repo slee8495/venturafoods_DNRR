@@ -41,7 +41,7 @@ po %>%
   dplyr::mutate(qty = as.double(qty),
                 date = as.Date(date)) %>% 
   dplyr::mutate(location = sub("^0+", "",location)) %>% 
-  dplyr::mutate(ref = paste0(location, "_", item)) %>% 
+  dplyr::mutate(ref = paste0(location, "-", item)) %>% 
   dplyr::relocate(ref, item, location) -> po
 
 
@@ -60,7 +60,7 @@ receipt %>%
   dplyr::mutate(qty = as.double(qty),
                 date = as.Date(date)) %>% 
   dplyr::mutate(location = sub("^0+", "", location)) %>% 
-  dplyr::mutate(ref = paste0(location, "_", item)) %>% 
+  dplyr::mutate(ref = paste0(location, "-", item)) %>% 
   dplyr::relocate(ref, item, location) -> receipt
 
 
@@ -77,13 +77,13 @@ campus %>%
 #### vlookup campus to PO and receipt ####
 po %>% 
   dplyr::left_join(campus) %>% 
-  dplyr::mutate(campus_ref = paste0(campus, "_", item)) %>% 
+  dplyr::mutate(campus_ref = paste0(campus, "-", item)) %>% 
   dplyr::relocate(ref, campus_ref, campus, item, location, qty, date, po_no) -> po
 
 
 receipt %>% 
   dplyr::left_join(campus) %>% 
-  dplyr::mutate(campus_ref = paste0(campus, "_", item)) %>% 
+  dplyr::mutate(campus_ref = paste0(campus, "-", item)) %>% 
   dplyr::relocate(ref, campus_ref, campus, item, location, qty, date, receipt_no) -> receipt
 
 
