@@ -10,9 +10,9 @@ library(lubridate)
 
 
 # Read po, receipt ----
-po <- read.csv("Z:/IMPORT_JDE_OPENPO.csv",
+po <- read.csv("C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DSXIE/2023/10.19/po.csv",
                header = FALSE)
-receipt <- read.csv("Z:/IMPORT_RECEIPTS.csv",
+receipt <- read.csv("C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DSXIE/2023/10.19/receipt.csv",
                     header = FALSE)
 
 
@@ -28,7 +28,9 @@ campus <- read_excel("S:/Supply Chain Projects/RStudio/BoM/Master formats/RM_on_
 ##### PO #####
 
 po %>% 
-  dplyr::rename(aa = V1) %>% 
+  dplyr::select(-1) %>% 
+  dplyr::slice(-1) %>% 
+  dplyr::rename(aa = V2)%>% 
   tidyr::separate(aa, c("1", "2", "3", "4", "5", "6", "7", "8"), sep = "~") %>% 
   dplyr::select(-"3") %>% 
   dplyr::rename(aa = "1") %>% 
@@ -47,7 +49,9 @@ po %>%
 
 #### receipt ####
 receipt %>% 
-  dplyr::rename(aa = V1) %>% 
+  dplyr::select(-1) %>% 
+  dplyr::slice(-1) %>% 
+  dplyr::rename(aa = V2)%>% 
   tidyr::separate(aa, c("1", "2", "3", "4", "5", "6", "7", "8"), sep = "~") %>% 
   dplyr::select(-"3", -"8") %>% 
   dplyr::rename(aa = "1") %>% 
@@ -91,5 +95,5 @@ receipt %>%
 #### Combine two files ####
 
 
-writexl::write_xlsx(po, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2023/10.12.23/po.xlsx")
-writexl::write_xlsx(receipt, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2023/10.12.23/receipt.xlsx")
+writexl::write_xlsx(po, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2023/10.19.23/po.xlsx")
+writexl::write_xlsx(receipt, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2023/10.19.23/receipt.xlsx")
