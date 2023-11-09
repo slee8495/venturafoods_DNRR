@@ -165,4 +165,37 @@ inv_analysis_2 %>%
 writexl::write_xlsx(inv_analysis_2, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2023/11.09.2023/FG inv.xlsx")
 
 
+###########################################################################################################################################
+###########################################################################################################################################
+###########################################################################################################################################
+###########################################################################################################################################
+###########################################################################################################################################
 
+#                                                              DSX Forcasting                                                             #
+
+
+dsx <- read_excel("S:/Global Shared Folders/Large Documents/S&OP/Demand Planning/Demand Planning Team/BI Forecast Backup/2023/DSX Forecast Backup - 2023.10.02.xlsx")
+
+dsx %>% 
+  janitor::clean_names() %>% 
+  dplyr::slice(-1) -> dsx_2
+
+colnames(dsx_2) <- dsx_2[1, ]
+
+dsx_2 %>%
+  slice(-1) %>%
+  janitor::clean_names() %>%
+  data.frame() %>%
+  dplyr::mutate(adjusted_forecast_cases = as.double(adjusted_forecast_cases),
+                product_label_sku_code = gsub("-", "", product_label_sku_code),
+                mfg_ref = paste0(product_manufacturing_location_code, "_", product_label_sku_code)) %>%
+  dplyr::select(mfg_ref, forecast_month_year_id, adjusted_forecast_cases) %>%
+  dplyr::group_by(mfg_ref, forecast_month_year_id) %>%
+  dplyr::summarise(adjusted_forecast_cases = sum(adjusted_forecast_cases)) %>%
+  dplyr::mutate(adjusted_forecast_cases = ifelse(is.na(adjusted_forecast_cases), 0, adjusted_forecast_cases)) %>% 
+  pivot_wider(names_from = forecast_month_year_id, values_from = adjusted_forecast_cases, values_fill = list(adjusted_forecast_cases = 0)) %>% 
+  dplyr::mutate(mfg_ref = gsub("_", "-", mfg_ref)) -> dsx_2
+
+
+  
+writexl::write_xlsx(dsx_2, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2023/11.09.2023/dsx.xlsx")
