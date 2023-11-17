@@ -18,7 +18,7 @@ receipt <- read.csv("C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Pro
 
 
 # Read campus_ref 
-campus <- read_excel("S:/Supply Chain Projects/RStudio/BoM/Master formats/RM_on_Hand/Campus_ref.xlsx")
+campus <- read_excel("S:/Supply Chain Projects/Linda Liang/reference files/Campus reference.xlsx")
 
 
 
@@ -72,7 +72,6 @@ receipt %>%
 #### Campus ####
 campus %>% 
   janitor::clean_names() %>% 
-  dplyr::rename(location = business_unit) %>% 
   dplyr::select(location, campus) -> campus
 
 
@@ -108,28 +107,23 @@ writexl::write_xlsx(receipt, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Wor
 
 #                                                              Inventory Analysis                                                         #
 
-inv_analysis <- read_xlsx("C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2023/11.16.2023/Inventory Analysis.xlsx")
+inv_analysis <- read_xlsx("C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/Safety Stock Compliance/Weekly Run Files/2023/11.14.23/FG_2.xlsx")
 manufacturers <- read_xlsx("C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2023/11.16.2023/Loc - Manufacturing Loc - SKU.xlsx")
 
-# inv_analysis ETL
-inv_analysis %>% 
-  dplyr::slice(-1) -> inv_analysis
 
-colnames(inv_analysis) <- inv_analysis[1, ]
+## Inventory ETL
 
 inv_analysis %>% 
   janitor::clean_names() %>% 
-  dplyr::slice(-1) %>% 
-  data.frame() %>% 
-  dplyr::select(location, na_3, product_label_sku, na_2, inventory_hold_status, inventory_qty_cases) %>% 
-  dplyr::rename(location_nm = na_3,
+  dplyr::mutate(product_label_sku = gsub("-", "", product_label_sku),
+                ref = paste0(location, "_", product_label_sku)) %>% 
+  dplyr::rename(location_nm = x2,
                 item = product_label_sku,
-                description = na_2,
-                hold_status = inventory_hold_status,
-                current_inventory_balance = inventory_qty_cases) %>% 
-  dplyr::mutate(item = gsub("-", "", item),
-                ref = paste0(location, "_", item)) %>% 
-  dplyr::relocate(ref) -> inv_analysis_2
+                description = x4,
+                hold_status = inventory_hold_status) %>% 
+  dplyr::relocate(ref) %>% 
+  dplyr::select(-inventory_status_code) %>% 
+  dplyr::mutate(current_inventory_balance = ifelse(is.na(current_inventory_balance), 0, current_inventory_balance)) -> inv_analysis_2
 
 
 # manufacturers ETL
