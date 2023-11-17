@@ -154,7 +154,8 @@ inv_analysis_2 %>%
                    hold_status = first(hold_status),
                    current_inventory_balance = sum(current_inventory_balance)) %>% 
   dplyr::mutate(ref = gsub("_", "-", ref),
-                mfg_ref = gsub("_", "-", mfg_ref)) -> inv_analysis_2
+                mfg_ref = gsub("_", "-", mfg_ref)) %>% 
+  dplyr::filter(item != "'1") -> inv_analysis_2
 
 writexl::write_xlsx(inv_analysis_2, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2023/11.16.2023/FG inv.xlsx")
 
