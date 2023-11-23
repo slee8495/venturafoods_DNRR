@@ -157,7 +157,7 @@ inv_bal %>%
   dplyr::filter(!is.na(item)) %>% 
   dplyr::select(bp, item, description, inventory) %>% 
   readr::type_convert() %>% 
-  dplyr::left_join(campus %>% select(location, campus) %>% rename(bp = location) %>% mutate(bp = as.double(bp))) %>% 
+  dplyr::left_join(campus %>% select(Location, Campus) %>% rename(bp = Location, campus = Campus) %>% mutate(bp = as.double(bp))) %>% 
   dplyr::mutate(ref = paste0(bp, "_", item),
                 campus_ref = paste0(campus, "_", item)) %>% 
   dplyr::relocate(ref, campus_ref, bp, campus, item, description) %>% 
@@ -190,6 +190,10 @@ rm %>%
 
 rbind(rm_inv, rm) -> rm_inv
 
+rm_inv %>% 
+  dplyr::mutate(ref = gsub("_", "-", ref),
+                campus_ref = gsub("_", "-", campus_ref)) -> rm_inv
+
 writexl::write_xlsx(rm_inv, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2023/11.21.2023/RM Inv.xlsx")
 
 
@@ -206,7 +210,7 @@ inv_bal %>%
   dplyr::filter(is.na(item_2)) %>% 
   dplyr::select(-item_2) %>% 
   dplyr::select(bp, item, description, usable, soft_hold, hard_hold) %>% 
-  dplyr::left_join(campus %>% select(location, campus) %>% rename(bp = location) %>% mutate(bp = as.double(bp))) %>% 
+  dplyr::left_join(campus %>% select(Location, Campus) %>% rename(bp = Location, campus = Campus) %>% mutate(bp = as.double(bp))) %>% 
   dplyr::mutate(ref = paste0(bp, "_", item),
                 campus_ref = paste0(campus, "_", item)) %>% 
   dplyr::rename(location = bp,
@@ -246,6 +250,10 @@ fg %>%
 
 
 rbind(fg_inv, fg) -> fg_inv
+
+fg_inv %>% 
+  dplyr::mutate(ref = gsub("_", "-", ref),
+                campus_ref = gsub("_", "-", campus_ref)) -> fg_inv
 
 writexl::write_xlsx(fg_inv, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2023/11.21.2023/FG Inv.xlsx")
 
