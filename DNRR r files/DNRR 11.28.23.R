@@ -157,7 +157,7 @@ inv_bal %>%
   dplyr::filter(!is.na(item)) %>% 
   dplyr::select(bp, item, description, inventory) %>% 
   readr::type_convert() %>% 
-  dplyr::left_join(campus %>% select(Location, Campus) %>% rename(bp = Location, campus = Campus) %>% mutate(bp = as.double(bp))) %>% 
+  dplyr::left_join(campus %>% select(location, campus) %>% rename(bp = location) %>% mutate(bp = as.double(bp))) %>% 
   dplyr::mutate(ref = paste0(bp, "_", item),
                 campus_ref = paste0(campus, "_", item)) %>% 
   dplyr::relocate(ref, campus_ref, bp, campus, item, description) %>% 
@@ -210,7 +210,7 @@ inv_bal %>%
   dplyr::filter(is.na(item_2)) %>% 
   dplyr::select(-item_2) %>% 
   dplyr::select(bp, item, description, usable, soft_hold, hard_hold) %>% 
-  dplyr::left_join(campus %>% select(Location, Campus) %>% rename(bp = Location, campus = Campus) %>% mutate(bp = as.double(bp))) %>% 
+  dplyr::left_join(campus %>% select(location, campus) %>% rename(bp = location) %>% mutate(bp = as.double(bp))) %>% 
   dplyr::mutate(ref = paste0(bp, "_", item),
                 campus_ref = paste0(campus, "_", item)) %>% 
   dplyr::rename(location = bp,
@@ -237,7 +237,7 @@ fg %>%
   janitor::clean_names() %>% 
   dplyr::slice(-1) %>% 
   dplyr::mutate(location = as.double(location)) %>% 
-  dplyr::filter(llocation == 226) %>% 
+  dplyr::filter(location == 226) %>% 
   dplyr::rename(campus = product_manufacturing_location) %>% 
   dplyr::mutate(item = gsub("-", "", item)) %>% 
   dplyr::rename(inventory_hold_status = hold_status,
