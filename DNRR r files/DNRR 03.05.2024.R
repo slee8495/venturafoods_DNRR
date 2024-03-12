@@ -179,6 +179,29 @@ writexl::write_xlsx(bom, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SC
 
 
 
+######################### Exception Report
+exception_report <- read_excel("C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/Safety Stock Compliance/Weekly Run Files/2024/03.05.2024/exception report.xlsx")
+
+exception_report[-1:-2, ] -> exception_report
+
+colnames(exception_report) <- exception_report[1, ]
+exception_report[-1, ] -> exception_report
+
+
+exception_report %>% 
+  janitor::clean_names() %>% 
+  dplyr::mutate(b_p = as.double(b_p),
+                item_number = as.double(item_number)) %>%
+  dplyr::mutate(ref = paste0(b_p, "_", item_number)) %>%
+  dplyr::left_join(campus %>% select(location, campus) %>% rename(b_p = location) %>% mutate(b_p = as.double(b_p))) %>% 
+  dplyr::mutate(campus_ref = paste0(campus, "_", item_number)) %>% 
+  dplyr::relocate(ref, campus_ref, campus) %>% 
+  dplyr::mutate(ref = gsub("_", "-", ref),
+                campus_ref = gsub("_", "-", campus_ref)) -> exception_report
+
+writexl::write_xlsx(exception_report, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2024/03.05.2024/exception_report.xlsx")
+
+
 
 ###########################################################################################################################################
 #################################################### Inventory RM & FG ####################################################################
@@ -213,7 +236,39 @@ inventory %>%
            !str_starts(description, "PALEET")) -> rm_inv
 
 
+## 25, 55 label inventory add ##
+inv_bal <- read_excel("C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/Safety Stock Compliance/Weekly Run Files/2024/03.05.2024/inv_bal.xlsx")
+inv_bal[-1:-2, ] -> inv_bal
+colnames(inv_bal) <- inv_bal[1, ]
+inv_bal[-1, ] -> inv_bal
 
+
+inv_bal %>% 
+  janitor::clean_names() %>% 
+  readr::type_convert() %>%
+  dplyr::mutate(bp = as.double(bp)) %>% 
+  dplyr::mutate(item = as.double(item)) %>% 
+  dplyr::filter(!is.na(item)) %>% 
+  dplyr::filter(bp %in% c(25, 55)) %>% 
+  dplyr::mutate(ref = paste0(bp, "-", item),
+                campus_ref = paste0(bp, "-", item),
+                campus = bp) %>%
+  dplyr::select(ref, campus_ref, bp, campus, item, description, inventory) %>% 
+  dplyr::rename(location = bp) %>% 
+  dplyr::left_join(exception_report %>% 
+                     janitor::clean_names() %>% 
+                     dplyr::select(item_number, mpf_or_line) %>% 
+                     dplyr::rename(item = item_number,
+                                   label = mpf_or_line) %>% 
+                     dplyr::mutate(item = as.double(item)) %>% 
+                     dplyr::filter(label == "LBL") %>% 
+                     dplyr::distinct(item, label), by = "item") %>% 
+  dplyr::filter(!is.na(label)) %>% 
+  dplyr::select(-label) %>% 
+  dplyr::mutate(location = as.character(location),
+                campus = as.character(campus))-> label_inv_25_55
+
+rbind(rm_inv, label_inv_25_55) -> rm_inv
 
 writexl::write_xlsx(rm_inv, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2024/03.05.2024/RM Inv.xlsx")
 
@@ -246,29 +301,6 @@ writexl::write_xlsx(fg_inv, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work
 
 
 
-
-
-# Exception Report
-exception_report <- read_excel("C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/Safety Stock Compliance/Weekly Run Files/2024/03.05.2024/exception report.xlsx")
-
-exception_report[-1:-2, ] -> exception_report
-
-colnames(exception_report) <- exception_report[1, ]
-exception_report[-1, ] -> exception_report
-
-
-exception_report %>% 
-  janitor::clean_names() %>% 
-  dplyr::mutate(b_p = as.double(b_p),
-                item_number = as.double(item_number)) %>%
-  dplyr::mutate(ref = paste0(b_p, "_", item_number)) %>%
-  dplyr::left_join(campus %>% select(location, campus) %>% rename(b_p = location) %>% mutate(b_p = as.double(b_p))) %>% 
-  dplyr::mutate(campus_ref = paste0(campus, "_", item_number)) %>% 
-  dplyr::relocate(ref, campus_ref, campus) %>% 
-  dplyr::mutate(ref = gsub("_", "-", ref),
-                campus_ref = gsub("_", "-", campus_ref)) -> exception_report
-
-writexl::write_xlsx(exception_report, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2024/03.05.2024/exception_report.xlsx")
 
 
 
