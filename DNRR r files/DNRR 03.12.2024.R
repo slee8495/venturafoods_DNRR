@@ -207,13 +207,14 @@ writexl::write_xlsx(exception_report, "C:/Users/slee/OneDrive - Ventura Foods/Ve
 #################################################### Inventory RM & FG ####################################################################
 
 
-inventory <- read_excel("C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/Safety Stock Compliance/Weekly Run Files/2024/03.12.2024/Inventory with Lot Report v.2.xlsx")
+inventory_rm <- read_excel("S:/Supply Chain Projects/Data Source (SCE)/Inventory/Inventory with Lot Report v.2 - 2024.03.19.xlsx",
+                        sheet = "RM")
 
-inventory[-1, ] -> inventory
-colnames(inventory) <- inventory[1, ]
-inventory[-1, ] -> inventory
+inventory_rm[-1, ] -> inventory_rm
+colnames(inventory_rm) <- inventory_rm[1, ]
+inventory_rm[-1, ] -> inventory_rm
 
-inventory %>% 
+inventory_rm %>% 
   janitor::clean_names() %>% 
   dplyr::mutate(item = gsub("-", "", item)) %>% 
   dplyr::mutate(ref = paste0(location, "_", item),
@@ -237,24 +238,26 @@ inventory %>%
 
 
 ## 25, 55 label inventory add ##
-inv_bal <- read_excel("C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/Safety Stock Compliance/Weekly Run Files/2024/03.12.2024/inv_bal.xlsx")
-inv_bal[-1:-2, ] -> inv_bal
-colnames(inv_bal) <- inv_bal[1, ]
-inv_bal[-1, ] -> inv_bal
 
+jde_inv_for_25_55_label <- read_excel("S:/Supply Chain Projects/Data Source (SCE)/Inventory/JDE Inventory Lot Detail - 2024.03.19.xlsx")
 
-inv_bal %>% 
+jde_inv_for_25_55_label[-1:-5, ] -> jde_inv_for_25_55_label
+colnames(jde_inv_for_25_55_label) <- jde_inv_for_25_55_label[1, ]
+jde_inv_for_25_55_label[-1, ] -> jde_inv_for_25_55_label
+
+jde_inv_for_25_55_label %>% 
   janitor::clean_names() %>% 
-  readr::type_convert() %>%
-  dplyr::mutate(bp = as.double(bp)) %>% 
+  dplyr::select(bp, item_number, description, on_hand) %>% 
+  dplyr::mutate(on_hand = as.double(on_hand),
+                campus = bp,
+                ref = paste0(bp, "_", item_number),
+                campus_ref = paste0(campus, "_", item_number)) %>%
+  dplyr::rename(location = bp,
+                item = item_number,
+                inventory = on_hand) %>% 
+  dplyr::relocate(ref, campus_ref, location, campus, item, description, inventory) %>% 
+  dplyr::filter(grepl("^[0-9]+$", item)) %>% 
   dplyr::mutate(item = as.double(item)) %>% 
-  dplyr::filter(!is.na(item)) %>% 
-  dplyr::filter(bp %in% c(25, 55)) %>% 
-  dplyr::mutate(ref = paste0(bp, "-", item),
-                campus_ref = paste0(bp, "-", item),
-                campus = bp) %>%
-  dplyr::select(ref, campus_ref, bp, campus, item, description, inventory) %>% 
-  dplyr::rename(location = bp) %>% 
   dplyr::left_join(exception_report %>% 
                      janitor::clean_names() %>% 
                      dplyr::select(item_number, mpf_or_line) %>% 
@@ -265,17 +268,27 @@ inv_bal %>%
                      dplyr::distinct(item, label), by = "item") %>% 
   dplyr::filter(!is.na(label)) %>% 
   dplyr::select(-label) %>% 
-  dplyr::mutate(location = as.character(location),
-                campus = as.character(campus))-> label_inv_25_55
+  dplyr::mutate(ref = gsub("_", "-", ref),
+                campus_ref = gsub("_", "-", campus_ref)) -> label_inv_25_55
+  
 
 rbind(rm_inv, label_inv_25_55) -> rm_inv
 
 writexl::write_xlsx(rm_inv, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2024/03.12.2024/RM Inv.xlsx")
 
 
+
+
 ### FG
 
-inventory %>% 
+inventory_fg <- read_excel("S:/Supply Chain Projects/Data Source (SCE)/Inventory/Inventory with Lot Report v.2 - 2024.03.19.xlsx",
+                        sheet = "FG")
+
+inventory_fg[-1, ] -> inventory_fg
+colnames(inventory_fg) <- inventory_fg[1, ]
+inventory_fg[-1, ] -> inventory_fg
+
+inventory_fg %>% 
   janitor::clean_names() %>% 
   dplyr::mutate(item = gsub("-", "", item)) %>% 
   dplyr::mutate(ref = paste0(location, "_", item),
