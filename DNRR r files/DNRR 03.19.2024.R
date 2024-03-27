@@ -234,7 +234,7 @@ inventory_rm %>%
   filter(!str_starts(description, "PWS ") & 
            !str_starts(description, "SUB ") & 
            !str_starts(description, "THW ") & 
-           !str_starts(description, "PALEET")) -> rm_inv
+           !str_starts(description, "PALLET")) -> rm_inv
 
 
 ## 25, 55 label inventory add ##
@@ -304,7 +304,7 @@ inventory_fg %>%
   filter(!str_starts(description, "PWS ") & 
            !str_starts(description, "SUB ") & 
            !str_starts(description, "THW ") & 
-           !str_starts(description, "PALEET")) -> fg_inv
+           !str_starts(description, "PALLET")) -> fg_inv
 
 
 
