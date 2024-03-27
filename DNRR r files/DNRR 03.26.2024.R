@@ -16,12 +16,12 @@ library(lubridate)
 
 
 
-base::dir.create("C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2024/03.19.2024")
+base::dir.create("C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2024/03.26.2024")
 
 # Read po, receipt ----
-po <- read.csv("C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DSXIE/2024/03.19/po.csv",
+po <- read.csv("C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DSXIE/2024/03.26/po.csv",
                header = FALSE)
-receipt <- read.csv("C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DSXIE/2024/03.19/receipt.csv",
+receipt <- read.csv("C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DSXIE/2024/03.26/receipt.csv",
                     header = FALSE)
 
 
@@ -103,13 +103,13 @@ receipt %>%
 #### Combine two files ####
 
 
-writexl::write_xlsx(po, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2024/03.19.2024/po.xlsx")
-writexl::write_xlsx(receipt, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2024/03.19.2024/receipt.xlsx")
+writexl::write_xlsx(po, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2024/03.26.2024/po.xlsx")
+writexl::write_xlsx(receipt, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2024/03.26.2024/receipt.xlsx")
 
 ###########################################################################################################################################
 
 # BoM
-bom <- read_excel("C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/BoM version 2/Weekly Run/2024/03.19.2024/JDE BoM 03.19.2024.xlsx",
+bom <- read_excel("C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/BoM version 2/Weekly Run/2024/03.26.2024/JDE BoM 03.26.2024.xlsx",
                   sheet = "BoM")
 
 bom[-1, ] -> bom
@@ -174,13 +174,13 @@ bom %>%
 
 
 
-writexl::write_xlsx(bom, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2024/03.19.2024/bom.xlsx")
+writexl::write_xlsx(bom, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2024/03.26.2024/bom.xlsx")
 
 
 
 
 ######################### Exception Report
-exception_report <- read_excel("C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/Safety Stock Compliance/Weekly Run Files/2024/03.19.2024/exception report.xlsx")
+exception_report <- read_excel("C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/Safety Stock Compliance/Weekly Run Files/2024/03.26.2024/exception report.xlsx")
 
 exception_report[-1:-2, ] -> exception_report
 
@@ -199,7 +199,7 @@ exception_report %>%
   dplyr::mutate(ref = gsub("_", "-", ref),
                 campus_ref = gsub("_", "-", campus_ref)) -> exception_report
 
-writexl::write_xlsx(exception_report, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2024/03.19.2024/exception_report.xlsx")
+writexl::write_xlsx(exception_report, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2024/03.26.2024/exception_report.xlsx")
 
 
 
@@ -207,7 +207,7 @@ writexl::write_xlsx(exception_report, "C:/Users/slee/OneDrive - Ventura Foods/Ve
 #################################################### Inventory RM & FG ####################################################################
 
 
-inventory_rm <- read_excel("S:/Supply Chain Projects/Data Source (SCE)/Inventory/Inventory with Lot Report v.2 - 2024.03.19.xlsx",
+inventory_rm <- read_excel("S:/Supply Chain Projects/Data Source (SCE)/Inventory/Inventory with Lot Report v.2 - 2024.03.26.xlsx",
                            sheet = "RM")
 
 inventory_rm[-1, ] -> inventory_rm
@@ -255,12 +255,12 @@ library(lubridate)
 
 
 
-base::dir.create("C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2024/03.19.2024")
+base::dir.create("C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2024/03.26.2024")
 
 # Read po, receipt ----
-po <- read.csv("C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DSXIE/2024/03.19/po.csv",
+po <- read.csv("C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DSXIE/2024/03.26/po.csv",
                header = FALSE)
-receipt <- read.csv("C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DSXIE/2024/03.19/receipt.csv",
+receipt <- read.csv("C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DSXIE/2024/03.26/receipt.csv",
                     header = FALSE)
 
 
@@ -342,13 +342,13 @@ receipt %>%
 #### Combine two files ####
 
 
-writexl::write_xlsx(po, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2024/03.19.2024/po.xlsx")
-writexl::write_xlsx(receipt, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2024/03.19.2024/receipt.xlsx")
+writexl::write_xlsx(po, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2024/03.26.2024/po.xlsx")
+writexl::write_xlsx(receipt, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2024/03.26.2024/receipt.xlsx")
 
 ###########################################################################################################################################
 
 # BoM
-bom <- read_excel("C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/BoM version 2/Weekly Run/2024/03.19.2024/JDE BoM 03.19.2024.xlsx",
+bom <- read_excel("C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/BoM version 2/Weekly Run/2024/03.26.2024/JDE BoM 03.26.2024.xlsx",
                   sheet = "BoM")
 
 bom[-1, ] -> bom
@@ -413,13 +413,13 @@ bom %>%
 
 
 
-writexl::write_xlsx(bom, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2024/03.19.2024/bom.xlsx")
+writexl::write_xlsx(bom, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2024/03.26.2024/bom.xlsx")
 
 
 
 
 ######################### Exception Report
-exception_report <- read_excel("C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/Safety Stock Compliance/Weekly Run Files/2024/03.19.2024/exception report.xlsx")
+exception_report <- read_excel("C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/Safety Stock Compliance/Weekly Run Files/2024/03.26.2024/exception report.xlsx")
 
 exception_report[-1:-2, ] -> exception_report
 
@@ -438,7 +438,7 @@ exception_report %>%
   dplyr::mutate(ref = gsub("_", "-", ref),
                 campus_ref = gsub("_", "-", campus_ref)) -> exception_report
 
-writexl::write_xlsx(exception_report, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2024/03.19.2024/exception_report.xlsx")
+writexl::write_xlsx(exception_report, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2024/03.26.2024/exception_report.xlsx")
 
 
 
@@ -446,7 +446,7 @@ writexl::write_xlsx(exception_report, "C:/Users/slee/OneDrive - Ventura Foods/Ve
 #################################################### Inventory RM & FG ####################################################################
 
 
-inventory_rm <- read_excel("S:/Supply Chain Projects/Data Source (SCE)/Inventory/Inventory with Lot Report v.2 - 2024.03.19.xlsx",
+inventory_rm <- read_excel("S:/Supply Chain Projects/Data Source (SCE)/Inventory/Inventory with Lot Report v.2 - 2024.03.26.xlsx",
                            sheet = "RM")
 
 inventory_rm[-1, ] -> inventory_rm
@@ -478,7 +478,7 @@ inventory_rm %>%
 
 ## 25, 55 label inventory add ##
 
-jde_inv_for_25_55_label <- read_excel("S:/Supply Chain Projects/Data Source (SCE)/Inventory/JDE Inventory Lot Detail - 2024.03.19.xlsx")
+jde_inv_for_25_55_label <- read_excel("S:/Supply Chain Projects/Data Source (SCE)/Inventory/JDE Inventory Lot Detail - 2024.03.26.xlsx")
 
 jde_inv_for_25_55_label[-1:-5, ] -> jde_inv_for_25_55_label
 colnames(jde_inv_for_25_55_label) <- jde_inv_for_25_55_label[1, ]
@@ -513,14 +513,14 @@ jde_inv_for_25_55_label %>%
 
 rbind(rm_inv, label_inv_25_55) -> rm_inv
 
-writexl::write_xlsx(rm_inv, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2024/03.19.2024/RM Inv.xlsx")
+writexl::write_xlsx(rm_inv, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2024/03.26.2024/RM Inv.xlsx")
 
 
 
 
 ### FG
 
-inventory_fg <- read_excel("S:/Supply Chain Projects/Data Source (SCE)/Inventory/Inventory with Lot Report v.2 - 2024.03.19.xlsx",
+inventory_fg <- read_excel("S:/Supply Chain Projects/Data Source (SCE)/Inventory/Inventory with Lot Report v.2 - 2024.03.26.xlsx",
                            sheet = "FG")
 
 inventory_fg[-1, ] -> inventory_fg
@@ -548,7 +548,7 @@ inventory_fg %>%
 
 
 
-writexl::write_xlsx(fg_inv, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2024/03.19.2024/FG Inv.xlsx")
+writexl::write_xlsx(fg_inv, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2024/03.26.2024/FG Inv.xlsx")
 
 
 
@@ -562,7 +562,7 @@ writexl::write_xlsx(fg_inv, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work
 
 
 
-jde_inv_for_25_55_label <- read_excel("S:/Supply Chain Projects/Data Source (SCE)/Inventory/JDE Inventory Lot Detail - 2024.03.19.xlsx")
+jde_inv_for_25_55_label <- read_excel("S:/Supply Chain Projects/Data Source (SCE)/Inventory/JDE Inventory Lot Detail - 2024.03.26.xlsx")
 
 jde_inv_for_25_55_label[-1:-5, ] -> jde_inv_for_25_55_label
 colnames(jde_inv_for_25_55_label) <- jde_inv_for_25_55_label[1, ]
@@ -597,14 +597,14 @@ jde_inv_for_25_55_label %>%
 
 rbind(rm_inv, label_inv_25_55) -> rm_inv
 
-writexl::write_xlsx(rm_inv, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2024/03.19.2024/RM Inv.xlsx")
+writexl::write_xlsx(rm_inv, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2024/03.26.2024/RM Inv.xlsx")
 
 
 
 
 ### FG
 
-inventory_fg <- read_excel("S:/Supply Chain Projects/Data Source (SCE)/Inventory/Inventory with Lot Report v.2 - 2024.03.19.xlsx",
+inventory_fg <- read_excel("S:/Supply Chain Projects/Data Source (SCE)/Inventory/Inventory with Lot Report v.2 - 2024.03.26.xlsx",
                            sheet = "FG")
 
 inventory_fg[-1, ] -> inventory_fg
@@ -632,7 +632,7 @@ inventory_fg %>%
 
 
 
-writexl::write_xlsx(fg_inv, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2024/03.19.2024/FG Inv.xlsx")
+writexl::write_xlsx(fg_inv, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2024/03.26.2024/FG Inv.xlsx")
 
 
 
@@ -644,3 +644,7 @@ writexl::write_xlsx(fg_inv, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work
 # https://edgeanalytics.venturafoods.com/MicroStrategyLibrary/app/DF007F1C11E9B3099BB30080EF7513D2/F5F6A922304E44E2C850A397EFDE78FB
 
 
+
+
+file.copy("C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2024/03.19.2024/DNRR Tool ver.3 - 03.19.2024.xlsx",
+          "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2024/03.26.2024/DNRR Tool ver.3 - 03.19.2024.xlsx")
