@@ -293,5 +293,5 @@ writexl::write_xlsx(rm_inv, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work
 
 
 
-file.copy("C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2024/07.30.2024/DNRR Tool ver.3 - 07.30.2024.xlsx",
+file.copy("C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2024/08.06.2024/DNRR Tool ver.3 - 08.06.2024.xlsx",
           "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2024/08.13.2024/DNRR Tool ver.3 - 08.13.2024.xlsx")
