@@ -35,7 +35,7 @@ campus %>%
 ###########################################################################################################################################
 
 # BoM
-bom <- read_excel("S:/Supply Chain Projects/Data Source (SCE)/JDE BoM/2024/JDE BoM 12.03.2024.xlsx",
+bom <- read_excel("S:/Supply Chain Projects/Data Source (SCE)/JDE BoM/2024/JDE BoM 12.03.2024_2.xlsx",
                   sheet = "BoM")
 
 bom[-1, ] -> bom
