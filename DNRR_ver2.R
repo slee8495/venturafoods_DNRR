@@ -35,7 +35,7 @@ campus %>%
 ###########################################################################################################################################
 
 # BoM
-bom <- read_excel("S:/Supply Chain Projects/Data Source (SCE)/JDE BoM/2025/JDE BoM 01.14.2025.xlsx",
+bom <- read_excel("S:/Supply Chain Projects/Data Source (SCE)/JDE BoM/2025/JDE BoM 01.21.2025.xlsx",
                   sheet = "BoM")
 
 bom[-1, ] -> bom
@@ -50,7 +50,8 @@ bom %>%
 
 ################## Lag 1 DSX #####################
 
-dsx <- read_excel("S:/Global Shared Folders/Large Documents/S&OP/Demand Planning/BI Forecast Backup/2024/DSX Forecast Backup - 2024.12.02.xlsx")
+dsx <- read_excel("S:/Global Shared Folders/Large Documents/S&OP/Demand Planning/BI Forecast Backup/2024/DSX Forecast Backup - 2024.12.02.xlsx") 
+#When running in month this should be first forecast of month back
 
 dsx %>% 
   janitor::clean_names() %>% 
@@ -100,13 +101,13 @@ bom %>%
 
 
 
-writexl::write_xlsx(bom, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2025/01.14.2025/bom.xlsx")
-
+writexl::write_xlsx(bom, "C:/Users/SPoudel/Ventura Foods/SC Analytics Team - General/Transition Documents Stan/DNRR Report/bom.xlsx")
+#change it to personal drive
 
 
 
 ######################### Exception Report
-exception_report <- read_excel("S:/Supply Chain Projects/Data Source (SCE)/JDE Exception report extract/2025/exception report 2025.01.14.xlsx")
+exception_report <- read_excel("S:/Supply Chain Projects/Data Source (SCE)/JDE Exception report extract/2025/exception report 2025.01.21.xlsx")
 
 exception_report[-1:-2, ] -> exception_report
 
@@ -125,7 +126,7 @@ exception_report %>%
   dplyr::mutate(ref = gsub("_", "-", ref),
                 campus_ref = gsub("_", "-", campus_ref)) -> exception_report
 
-writexl::write_xlsx(exception_report, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2025/01.14.2025/exception_report.xlsx")
+writexl::write_xlsx(exception_report, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2025/01.21.2025/exception_report.xlsx")
 
 
 
