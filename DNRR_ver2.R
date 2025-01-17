@@ -51,7 +51,7 @@ bom %>%
 ################## Lag 1 DSX #####################
 
 dsx <- read_excel("S:/Global Shared Folders/Large Documents/S&OP/Demand Planning/BI Forecast Backup/2024/DSX Forecast Backup - 2024.12.02.xlsx") 
-#When running in month this should be first forecast of month back
+#When running in month this should be first forecast of month back. 
 
 dsx %>% 
   janitor::clean_names() %>% 
