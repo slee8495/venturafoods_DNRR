@@ -51,7 +51,7 @@ bom %>%
 ################## Lag 1 DSX #####################
 
 dsx <- read_excel("S:/Global Shared Folders/Large Documents/S&OP/Demand Planning/BI Forecast Backup/2024/DSX Forecast Backup - 2024.12.02.xlsx") 
-#When running in month this should be first forecast of month back. 
+# When running in month this should be first forecast of month back. 
 
 dsx %>% 
   janitor::clean_names() %>% 
@@ -101,7 +101,7 @@ bom %>%
 
 
 
-writexl::write_xlsx(bom, "C:/Users/SPoudel/Ventura Foods/SC Analytics Team - General/Transition Documents Stan/DNRR Report/bom.xlsx")
+writexl::write_xlsx(bom, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2025/01.21.2025/bom.xlsx")
 #change it to personal drive
 
 
@@ -134,7 +134,7 @@ writexl::write_xlsx(exception_report, "C:/Users/slee/OneDrive - Ventura Foods/Ve
 #################################################### Inventory RM & FG ####################################################################
 
 
-inventory_rm <- read_excel("S:/Supply Chain Projects/Data Source (SCE)/Inventory/Inventory with Lot Report v.2 - 2025.01.14.xlsx",
+inventory_rm <- read_excel("S:/Supply Chain Projects/Data Source (SCE)/Inventory/Inventory with Lot Report v.2 - 2025.01.21.xlsx",
                            sheet = "RM")
 
 inventory_rm[-1, ] -> inventory_rm
@@ -168,7 +168,7 @@ inventory_rm %>%
 
 ## 25, 55 label inventory add ##
 
-jde_inv_for_25_55_label <- read_excel("S:/Supply Chain Projects/Data Source (SCE)/Inventory/JDE Inventory Lot Detail - 2025.01.14.xlsx")
+jde_inv_for_25_55_label <- read_excel("S:/Supply Chain Projects/Data Source (SCE)/Inventory/JDE Inventory Lot Detail - 2025.01.21.xlsx")
 
 jde_inv_for_25_55_label[-1:-5, ] -> jde_inv_for_25_55_label
 colnames(jde_inv_for_25_55_label) <- jde_inv_for_25_55_label[1, ]
@@ -203,14 +203,14 @@ jde_inv_for_25_55_label %>%
 
 rbind(rm_inv, label_inv_25_55) -> rm_inv
 
-writexl::write_xlsx(rm_inv, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2025/01.14.2025/RM Inv.xlsx")
+writexl::write_xlsx(rm_inv, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2025/01.21.2025/RM Inv.xlsx")
 
 
 
 
 ### FG
 
-inventory_fg <- read_excel("S:/Supply Chain Projects/Data Source (SCE)/Inventory/Inventory with Lot Report v.2 - 2025.01.14.xlsx",
+inventory_fg <- read_excel("S:/Supply Chain Projects/Data Source (SCE)/Inventory/Inventory with Lot Report v.2 - 2025.01.21.xlsx",
                            sheet = "FG")
 
 inventory_fg[-1, ] -> inventory_fg
@@ -238,7 +238,7 @@ inventory_fg %>%
 
 
 
-writexl::write_xlsx(fg_inv, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2025/01.14.2025/FG Inv.xlsx")
+writexl::write_xlsx(fg_inv, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2025/01.21.2025/FG Inv.xlsx")
 
 
 
@@ -252,8 +252,8 @@ writexl::write_xlsx(fg_inv, "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work
 
 
 
-file.copy("C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2025/01.07.2025/DNRR Tool ver.3 - 01.07.2025.xlsx",
-          "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2025/01.14.2025/DNRR Tool ver.3 - 01.14.2025.xlsx")
+file.copy("C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2025/01.14.2025/DNRR Tool ver.3 - 01.14.2025.xlsx",
+          "C:/Users/slee/OneDrive - Ventura Foods/Ventura Work/SCE/Project/FY 23/DNRR Automation/DNRR Weekly Report/2025/01.21.2025/DNRR Tool ver.3 - 01.21.2025.xlsx")
 
 
 
